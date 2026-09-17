@@ -1,0 +1,17 @@
+name: Build and Push Image
+
+on:
+  push:
+    branches: ['main', 'master']
+    tags: ['v*']
+  pull_request:
+    branches: ['main', 'master']
+  workflow_dispatch:
+
+jobs:
+  build-image:
+    # 格式为：组织名/模板仓库名/.github/workflows/模板文件名.yml@分支名
+    uses: x-k-io/.github/.github/workflows/java-service-build-image.yml@main
+    with:
+      image_name: ${{ github.repository }}
+      context_path: '.'
